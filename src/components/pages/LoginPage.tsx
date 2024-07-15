@@ -135,9 +135,9 @@ export const LoginPage: React.FC = () => {
           </button>
         </form>
         <div className={styles.links}>
-          <a href="#">Winbox</a>
+          <a href="https://mt.lv/winbox64">Winbox</a>
           <a href="#">Graphs</a>
-          <a href="#">License</a>
+          <a href="http://www.realco.com.tw/help/license.html">License</a>
           <a href="https://help.mikrotik.com/docs/">Help</a>
         </div>
       </div>
