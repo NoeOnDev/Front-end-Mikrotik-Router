@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import styles from "../../css/LoginStyles.module.css";
 import logoNegro from "../../assets/logo-black.svg";
 import logoBlanco from "../../assets/logo-white.svg";
@@ -51,15 +52,23 @@ export const LoginPage: React.FC = () => {
         password,
       });
       if (response.data.status === "OK") {
-        alert("Conexión exitosa");
+        toast.success("Conexión exitosa", {
+          theme: isDarkMode ? "light" : "dark",
+        });
       } else {
-        alert(`Error: ${response.data.message}`);
+        toast.error(`Error: ${response.data.message}`, {
+          theme: isDarkMode ? "light" : "dark",
+        });
       }
     } catch (error) {
       if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
+        toast.error(`Error: ${error.message}`, {
+          theme: isDarkMode ? "light" : "dark",
+        });
       } else {
-        alert("Error desconocido");
+        toast.error("Error desconocido", {
+          theme: isDarkMode ? "light" : "dark",
+        });
       }
     }
   };
