@@ -20,7 +20,6 @@ interface User {
   group: string;
   address?: string;
   "last-logged-in"?: string;
-  ".id": string;
 }
 
 export const AddUsersPage: React.FC = () => {
@@ -62,34 +61,6 @@ export const AddUsersPage: React.FC = () => {
 
   const handleAddUser = (user: any) => {
     console.log(user);
-  };
-
-  const handleDeleteUser = async (userId: string) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("No token found");
-        return;
-      }
-
-      const response = await axios.post(
-        "http://localhost:5000/users/delete",
-        { user_id: userId },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-
-      if (response.data.status === "OK") {
-        setUsers(users.filter((user) => user[".id"] !== userId));
-      } else {
-        console.error("Error deleting user:", response.data.message);
-      }
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
   };
 
   return (
@@ -137,7 +108,6 @@ export const AddUsersPage: React.FC = () => {
                       type="button"
                       aria-label="Eliminar usuario"
                       className={styles.deleteButton}
-                      onClick={() => handleDeleteUser(user[".id"])}
                     >
                       <FaTrash />
                     </button>
