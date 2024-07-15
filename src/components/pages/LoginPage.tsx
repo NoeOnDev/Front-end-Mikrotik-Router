@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../css/loginStyles.module.css";
-import logo from "../../assets/MikroTik-Logo.png";
+import logo from "../../assets/logo-black.svg";
 
 export const LoginPage: React.FC = () => {
   return (
