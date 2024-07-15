@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../css/LoginStyles.module.css";
 import logo from "../../assets/logo-black.svg";
 import {
@@ -8,13 +8,27 @@ import {
   FaEye,
   FaEyeSlash,
 } from "react-icons/fa";
+import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 
 export const LoginPage: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, [isDarkMode]);
 
   return (
     <div className={styles.container}>
@@ -22,6 +36,7 @@ export const LoginPage: React.FC = () => {
         <div className={styles.logo}>
           <img src={logo} alt="MikroTik" />
         </div>
+        <ThemeToggleButton onClick={toggleTheme} />
         <p>
           Bienvenido al portal de acceso del enrutador MikroTik. Por favor,
           ingrese sus credenciales para administrar el dispositivo. Si no posee

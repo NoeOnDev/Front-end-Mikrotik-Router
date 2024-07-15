@@ -1,23 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 :root {
-    --background-color-dark: #242424;
-    --text-color-dark: #FFFFFF;
     --background-color-light: #FFFFFF;
     --text-color-light: #000000;
-    --input-background-color: #f0f0f0;
-    --input-border-color: #ccc;
+    --background-color-dark: #242424;
+    --text-color-dark: #FFFFFF;
+    --input-background-color-light: #f0f0f0;
+    --input-border-color-light: #ccc;
+    --input-background-color-dark: #333;
+    --input-border-color-dark: #555;
     --button-background-color: #007bff;
     --button-hover-color: #0056b3;
     --button-active-color: #004085;
     --button-text-color: #fff;
+    --shadow-light: 0 0 10px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] {
+    --background-color: var(--background-color-light);
+    --text-color: var(--text-color-light);
+    --input-background-color: var(--input-background-color-light);
+    --input-border-color: var(--input-border-color-light);
+    --shadow: var(--shadow-light);
+}
+
+[data-theme="dark"] {
+    --background-color: var(--background-color-dark);
+    --text-color: var(--text-color-dark);
+    --input-background-color: var(--input-background-color-dark);
+    --input-border-color: var(--input-border-color-dark);
+    --shadow: var(--shadow-dark);
 }
 
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--background-color-light);
-    color: var(--text-color-light);
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: 'Manrope', sans-serif;
 }
 
@@ -26,7 +46,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: var(--background-color-light);
+    background-color: var(--background-color);
 }
 
 .loginBox {
@@ -36,8 +56,12 @@ body {
     width: 400px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     background-color: var(--background-color-light);
+}
+
+[data-theme="dark"] .loginBox {
+    background-color: var(--background-color-dark);
 }
 
 .logo img {
@@ -68,6 +92,7 @@ body {
     border: 1px solid var(--input-border-color);
     border-radius: 5px;
     background-color: var(--input-background-color);
+    color: var(--text-color);
 }
 
 .eyeIcon {
