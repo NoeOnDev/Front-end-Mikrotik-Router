@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   FaTrash,
   FaComment,
@@ -11,9 +11,15 @@ import {
 import styles from "../../css/AddUsersPage.module.css";
 import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 import { ThemeContext } from "../../context/ThemeContext";
+import { AddUserModal } from "../utils/AddUserModal";
 
 export const AddUsersPage: React.FC = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAddUser = (user: any) => {
+    console.log(user);
+  };
 
   return (
     <div className={styles.container}>
@@ -22,7 +28,11 @@ export const AddUsersPage: React.FC = () => {
       </div>
       <div className={styles.userManagement}>
         <div className={styles.header}>
-          <button type="button" className={styles.addButton}>
+          <button
+            type="button"
+            className={styles.addButton}
+            onClick={() => setIsModalOpen(true)}
+          >
             <FaPlus className={styles.icon} /> Agregar nuevo usuario
           </button>
         </div>
@@ -69,6 +79,11 @@ export const AddUsersPage: React.FC = () => {
           </table>
         </div>
       </div>
+      <AddUserModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddUser}
+      />
     </div>
   );
 };
