@@ -39,6 +39,7 @@ export const LoginPage: React.FC = () => {
         toast.success("Conexión exitosa", {
           theme: isDarkMode ? "light" : "dark",
         });
+        localStorage.setItem("token", response.data.token);
         navigate("/add-users");
       } else {
         toast.error(`Error: ${response.data.message}`, {

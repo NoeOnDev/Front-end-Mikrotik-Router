@@ -30,11 +30,22 @@ export const AddUsersPage: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.post("http://localhost:5000/users", {
-          ip: "192.168.0.41",
-          username: "admin",
-          password: "noeon",
-        });
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.error("No token found");
+          return;
+        }
+
+        const response = await axios.post(
+          "http://localhost:5000/users",
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+
         if (response.data.status === "OK") {
           setUsers(response.data.users);
         } else {
