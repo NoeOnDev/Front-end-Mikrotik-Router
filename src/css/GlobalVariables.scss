@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+:root {
+  --background-color-light: #ffffff;
+  --text-color-light: #000000;
+  --background-color-dark: #242424;
+  --text-color-dark: #ffffff;
+  --input-background-color-light: #f0f0f0;
+  --input-border-color-light: #ccc;
+  --input-background-color-dark: #333;
+  --input-border-color-dark: #555;
+  --button-background-color: #007bff;
+  --button-hover-color: #0056b3;
+  --button-active-color: #004085;
+  --button-text-color: #fff;
+  --shadow-light: 0 0 10px rgba(0, 0, 0, 0.1);
+  --shadow-dark: 0 0 10px rgba(255, 255, 255, 0.1);
+  --cancel-button-background-color: red;
+  --cancel-button-hover-color: darkred;
+  --delete-button-background-color: red;
+  --delete-button-hover-color: darkred;
+  --border-color-light: #000000;
+  --border-color-dark: #ffffff;
+
+  --font-family: "Manrope", sans-serif;
+}
+
+[data-theme="light"] {
+  --background-color: var(--background-color-light);
+  --text-color: var(--text-color-light);
+  --input-background-color: var(--input-background-color-light);
+  --input-border-color: var(--input-border-color-light);
+  --shadow: var(--shadow-light);
+  --border-color: var(--border-color-light);
+}
+
+[data-theme="dark"] {
+  --background-color: var(--background-color-dark);
+  --text-color: var(--text-color-dark);
+  --input-background-color: var(--input-background-color-dark);
+  --input-border-color: var(--input-border-color-dark);
+  --shadow: var(--shadow-dark);
+  --border-color: var(--border-color-dark);
+}

@@ -1,46 +1,11 @@
-:root {
-    --background-color-light: #ffffff;
-    --background-color-dark: #242424;
-    --text-color-light: #000000;
-    --text-color-dark: #ffffff;
-    --input-background-color-light: #f0f0f0;
-    --input-background-color-dark: #333333;
-    --input-border-color-light: #cccccc;
-    --input-border-color-dark: #555555;
-    --button-background-color: #007bff;
-    --button-hover-color: #0056b3;
-    --button-active-color: #004085;
-    --button-text-color: #ffffff;
-    --shadow-light: 0 0 10px rgba(0, 0, 0, 0.1);
-    --shadow-dark: 0 0 10px rgba(255, 255, 255, 0.1);
-    --border-color-light: #000000;
-    --border-color-dark: #ffffff;
-}
-
-[data-theme="light"] {
-    --background-color: var(--background-color-light);
-    --text-color: var(--text-color-light);
-    --input-background-color: var(--input-background-color-light);
-    --input-border-color: var(--input-border-color-light);
-    --border-color: var(--border-color-light);
-    --shadow: var(--shadow-light);
-}
-
-[data-theme="dark"] {
-    --background-color: var(--background-color-dark);
-    --text-color: var(--text-color-dark);
-    --input-background-color: var(--input-background-color-dark);
-    --input-border-color: var(--input-border-color-dark);
-    --border-color: var(--border-color-dark);
-    --shadow: var(--shadow-dark);
-}
+@import './GlobalVariables.scss';
 
 body {
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
     color: var(--text-color);
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-family);
 }
 
 .container {
@@ -128,9 +93,17 @@ body {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
-    background-color: red;
+    background-color: var(--delete-button-background-color);
     color: white;
     cursor: pointer;
+}
+
+.deleteButton:hover {
+    background-color: var(--delete-button-hover-color);
+}
+
+.deleteButton:active {
+    transform: scale(0.95);
 }
 
 .icon {

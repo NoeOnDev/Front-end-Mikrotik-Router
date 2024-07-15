@@ -46,13 +46,16 @@
     margin-top: 20px;
 }
 
-.buttonLeft {
+.buttonGroup .buttonLeft,
+.buttonGroup .buttonRight {
     display: flex;
+}
+
+.buttonLeft {
     justify-content: flex-start;
 }
 
 .buttonRight {
-    display: flex;
     justify-content: flex-end;
 }
 
@@ -68,7 +71,11 @@
 }
 
 .buttonGroup .cancelButton {
-    background-color: red;
+    background-color: var(--cancel-button-background-color);
+}
+
+.buttonGroup .cancelButton:hover {
+    background-color: var(--cancel-button-hover-color);
 }
 
 .buttonGroup button:hover {
