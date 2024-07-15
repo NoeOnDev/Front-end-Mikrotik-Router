@@ -15,7 +15,7 @@ export const LoginPage: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark";
+    return savedTheme === "light" ? true : false;
   });
 
   const togglePasswordVisibility = () => {
@@ -25,16 +25,16 @@ export const LoginPage: React.FC = () => {
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => {
       const newMode = !prevMode;
-      localStorage.setItem("theme", newMode ? "dark" : "light");
+      localStorage.setItem("theme", newMode ? "light" : "dark");
       return newMode;
     });
   };
 
   useEffect(() => {
     if (isDarkMode) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
       document.documentElement.setAttribute("data-theme", "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
     }
   }, [isDarkMode]);
 
@@ -46,7 +46,7 @@ export const LoginPage: React.FC = () => {
       <div className={styles.loginBox}>
         <div className={styles.logo}>
           <a href="https://mikrotik.com/">
-            <img src={isDarkMode ? logoBlanco : logoNegro} alt="MikroTik" />
+            <img src={isDarkMode ? logoNegro : logoBlanco} alt="MikroTik" />
           </a>
         </div>
         <p>
