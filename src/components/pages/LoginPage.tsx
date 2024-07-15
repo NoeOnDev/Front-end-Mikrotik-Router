@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../css/LoginStyles.module.css";
-import logo from "../../assets/logo-black.svg";
+import logoNegro from "../../assets/logo-black.svg";
+import logoBlanco from "../../assets/logo-white.svg";
 import {
   FaNetworkWired,
   FaUser,
@@ -12,14 +13,21 @@ import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 
 export const LoginPage: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark";
+  });
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      localStorage.setItem("theme", newMode ? "dark" : "light");
+      return newMode;
+    });
   };
 
   useEffect(() => {
@@ -32,11 +40,15 @@ export const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.themeToggleButton}>
+        <ThemeToggleButton onClick={toggleTheme} isDarkMode={isDarkMode} />
+      </div>
       <div className={styles.loginBox}>
         <div className={styles.logo}>
-          <img src={logo} alt="MikroTik" />
+          <a href="https://mikrotik.com/">
+            <img src={isDarkMode ? logoBlanco : logoNegro} alt="MikroTik" />
+          </a>
         </div>
-        <ThemeToggleButton onClick={toggleTheme} />
         <p>
           Bienvenido al portal de acceso del enrutador MikroTik. Por favor,
           ingrese sus credenciales para administrar el dispositivo. Si no posee

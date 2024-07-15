@@ -66,6 +66,7 @@ body {
 
 .logo img {
     width: 200px;
+    cursor: pointer;
 }
 
 .formLogin {
@@ -102,6 +103,17 @@ body {
     cursor: pointer;
     color: var(--input-border-color);
 }
+
+.themeToggleButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+}
+
 
 .loginButton {
     padding: 10px;
