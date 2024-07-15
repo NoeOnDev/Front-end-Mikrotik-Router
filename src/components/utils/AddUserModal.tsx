@@ -46,7 +46,11 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
       <div className={styles.modalContent}>
         <div className={styles.formGroup}>
           <label>Habilitado</label>
-          <select title="None" value={enabled} onChange={(e) => setEnabled(e.target.value)}>
+          <select
+            title="None"
+            value={enabled}
+            onChange={(e) => setEnabled(e.target.value)}
+          >
             <option value="Enable">Enable</option>
             <option value="Disable">Disable</option>
           </select>
@@ -129,9 +133,15 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           </select>
         </div>
         <div className={styles.buttonGroup}>
-          <button onClick={onClose}>Cancelar</button>
-          <button onClick={handleSubmit}>Aplicar</button>
-          <button onClick={handleSubmit}>Aceptar</button>
+          <div className={styles.buttonLeft}>
+            <button className={styles.cancelButton} onClick={onClose}>
+              Cancelar
+            </button>
+          </div>
+          <div className={styles.buttonRight}>
+            <button onClick={handleSubmit}>Aplicar</button>
+            <button onClick={handleSubmit}>Aceptar</button>
+          </div>
         </div>
       </div>
     </div>

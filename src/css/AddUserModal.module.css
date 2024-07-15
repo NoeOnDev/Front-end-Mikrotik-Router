@@ -42,8 +42,18 @@
 
 .buttonGroup {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-top: 20px;
+}
+
+.buttonLeft {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.buttonRight {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .buttonGroup button {
@@ -55,6 +65,10 @@
     color: var(--button-text-color);
     cursor: pointer;
     transition: background-color 0.3s, transform 0.1s;
+}
+
+.buttonGroup .cancelButton {
+    background-color: red;
 }
 
 .buttonGroup button:hover {
