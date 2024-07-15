@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../css/loginStyles.module.css";
 import logo from "../../assets/logo-black.svg";
-import { FaNetworkWired, FaUser, FaLock } from "react-icons/fa";
+import {
+  FaNetworkWired,
+  FaUser,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 
 export const LoginPage: React.FC = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.loginBox}>
@@ -38,13 +50,16 @@ export const LoginPage: React.FC = () => {
           <div className={styles.inputContainer}>
             <FaLock className={styles.inputIcon} />
             <input
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               name="password"
               className={styles.inputField}
               placeholder="Contraseña"
             />
+            <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+              {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+            </div>
           </div>
-          <button type="submit" className={styles.connectButton}>
+          <button type="submit" className={styles.loginButton}>
             Conectar
           </button>
         </form>

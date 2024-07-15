@@ -54,6 +54,7 @@ body {
     display: flex;
     align-items: center;
     margin: 10px 0;
+    position: relative;
 }
 
 .inputIcon {
@@ -62,15 +63,22 @@ body {
 }
 
 .inputField {
-    width: calc(100% - 30px);
-    /* Ajusta el tamaño del input teniendo en cuenta el tamaño del icono */
+    width: calc(100% - 40px);
     padding: 10px;
     border: 1px solid var(--input-border-color);
     border-radius: 5px;
     background-color: var(--input-background-color);
 }
 
-.connectButton {
+.eyeIcon {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    cursor: pointer;
+    color: var(--input-border-color);
+}
+
+.loginButton {
     padding: 10px;
     margin: 20px 0;
     border: none;
@@ -82,11 +90,11 @@ body {
     transition: background-color 0.3s, transform 0.1s;
 }
 
-.connectButton:hover {
+.loginButton:hover {
     background-color: var(--button-hover-color);
 }
 
-.connectButton:active {
+.loginButton:active {
     background-color: var(--button-active-color);
     transform: scale(0.95);
 }
