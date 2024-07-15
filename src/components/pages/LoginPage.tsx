@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../../css/loginStyles.module.css";
+import styles from "../../css/LoginStyles.module.css";
 import logo from "../../assets/logo-black.svg";
 import {
   FaNetworkWired,
