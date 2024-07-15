@@ -94,6 +94,7 @@ export const LoginPage: React.FC = () => {
           <div className={styles.inputContainer}>
             <FaNetworkWired className={styles.inputIcon} />
             <input
+              required
               type="text"
               name="connect"
               className={styles.inputField}
@@ -105,6 +106,7 @@ export const LoginPage: React.FC = () => {
           <div className={styles.inputContainer}>
             <FaUser className={styles.inputIcon} />
             <input
+              required
               type="text"
               name="login"
               className={styles.inputField}
@@ -116,6 +118,7 @@ export const LoginPage: React.FC = () => {
           <div className={styles.inputContainer}>
             <FaLock className={styles.inputIcon} />
             <input
+              required
               type={passwordVisible ? "text" : "password"}
               name="password"
               className={styles.inputField}

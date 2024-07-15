@@ -7,6 +7,6 @@ import { App } from "./containers/App";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
-    <ToastContainer position="top-center" />
+    <ToastContainer stacked position="top-center" />
   </React.StrictMode>
 );
