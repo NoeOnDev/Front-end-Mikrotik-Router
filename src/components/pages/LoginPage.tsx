@@ -44,8 +44,8 @@ export const LoginPage: React.FC = () => {
               placeholder="Contraseña"
             />
           </div>
-          <button type="submit" className={styles.loginButton}>
-            Login
+          <button type="submit" className={styles.connectButton}>
+            Conectar
           </button>
         </form>
         <div className={styles.links}>
