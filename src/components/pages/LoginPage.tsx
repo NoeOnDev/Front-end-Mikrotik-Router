@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "../../css/LoginStyles.module.css";
 import logoNegro from "../../assets/logo-black.svg";
 import logoBlanco from "../../assets/logo-white.svg";
@@ -17,6 +18,9 @@ export const LoginPage: React.FC = () => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme === "light" ? true : false;
   });
+  const [ip, setIp] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -38,6 +42,28 @@ export const LoginPage: React.FC = () => {
     }
   }, [isDarkMode]);
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/connect", {
+        ip,
+        username,
+        password,
+      });
+      if (response.data.status === "OK") {
+        alert("Conexión exitosa");
+      } else {
+        alert(`Error: ${response.data.message}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`Error: ${error.message}`);
+      } else {
+        alert("Error desconocido");
+      }
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.themeToggleButton}>
@@ -55,7 +81,7 @@ export const LoginPage: React.FC = () => {
           las credenciales o el dispositivo no le pertenece, contacte a su
           administrador de red.
         </p>
-        <form className={styles.formLogin}>
+        <form className={styles.formLogin} onSubmit={handleSubmit}>
           <div className={styles.inputContainer}>
             <FaNetworkWired className={styles.inputIcon} />
             <input
@@ -63,6 +89,8 @@ export const LoginPage: React.FC = () => {
               name="connect"
               className={styles.inputField}
               placeholder="Conectar a (IP/DNS)"
+              value={ip}
+              onChange={(e) => setIp(e.target.value)}
             />
           </div>
           <div className={styles.inputContainer}>
@@ -72,6 +100,8 @@ export const LoginPage: React.FC = () => {
               name="login"
               className={styles.inputField}
               placeholder="Acceso (Nombre)"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div className={styles.inputContainer}>
@@ -81,6 +111,8 @@ export const LoginPage: React.FC = () => {
               name="password"
               className={styles.inputField}
               placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
