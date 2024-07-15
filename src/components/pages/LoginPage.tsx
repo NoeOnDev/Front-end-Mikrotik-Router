@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../css/loginStyles.module.css";
 import logo from "../../assets/logo-black.svg";
+import { FaNetworkWired, FaUser, FaLock } from "react-icons/fa";
 
 export const LoginPage: React.FC = () => {
   return (
@@ -16,22 +17,33 @@ export const LoginPage: React.FC = () => {
           administrador de red.
         </p>
         <form className={styles.formLogin}>
-          <label>
-            Conectar a (IP/DNS):
-            <input type="text" name="connect" className={styles.inputField} />
-          </label>
-          <label>
-            Acceso (Nombre):
-            <input type="text" name="login" className={styles.inputField} />
-          </label>
-          <label>
-            Contraseña:
+          <div className={styles.inputContainer}>
+            <FaNetworkWired className={styles.inputIcon} />
+            <input
+              type="text"
+              name="connect"
+              className={styles.inputField}
+              placeholder="Conectar a (IP/DNS)"
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaUser className={styles.inputIcon} />
+            <input
+              type="text"
+              name="login"
+              className={styles.inputField}
+              placeholder="Acceso (Nombre)"
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaLock className={styles.inputIcon} />
             <input
               type="password"
               name="password"
               className={styles.inputField}
+              placeholder="Contraseña"
             />
-          </label>
+          </div>
           <button type="submit" className={styles.loginButton}>
             Login
           </button>

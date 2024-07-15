@@ -50,10 +50,21 @@ body {
     flex-direction: column;
 }
 
-.inputField {
-    width: calc(100% - 22px);
-    padding: 10px;
+.inputContainer {
+    display: flex;
+    align-items: center;
     margin: 10px 0;
+}
+
+.inputIcon {
+    margin-right: 10px;
+    color: var(--input-border-color);
+}
+
+.inputField {
+    width: calc(100% - 30px);
+    /* Ajusta el tamaño del input teniendo en cuenta el tamaño del icono */
+    padding: 10px;
     border: 1px solid var(--input-border-color);
     border-radius: 5px;
     background-color: var(--input-background-color);
