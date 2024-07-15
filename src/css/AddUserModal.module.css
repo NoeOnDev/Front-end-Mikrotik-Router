@@ -60,7 +60,7 @@
 }
 
 .buttonGroup button {
-    margin-left: 10px;
+    margin-left: 15px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -71,6 +71,7 @@
 }
 
 .buttonGroup .cancelButton {
+    margin-left: 0px;
     background-color: var(--cancel-button-background-color);
 }
 

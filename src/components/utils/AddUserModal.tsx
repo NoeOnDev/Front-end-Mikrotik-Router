@@ -51,8 +51,8 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             value={enabled}
             onChange={(e) => setEnabled(e.target.value)}
           >
-            <option value="Enable">Enable</option>
-            <option value="Disable">Disable</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
           </select>
         </div>
         <div className={styles.formGroup}>
@@ -79,9 +79,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             value={group}
             onChange={(e) => setGroup(e.target.value)}
           >
-            <option value="full">full</option>
-            <option value="read">read</option>
-            <option value="write">write</option>
+            <option value="full">Full</option>
+            <option value="read">Read</option>
+            <option value="write">Write</option>
           </select>
         </div>
         <div className={styles.formGroup}>

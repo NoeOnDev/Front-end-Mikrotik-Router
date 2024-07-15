@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../../css/LoginStyles.module.css";
@@ -19,8 +20,8 @@ export const LoginPage: React.FC = () => {
   const [ip, setIp] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -38,6 +39,7 @@ export const LoginPage: React.FC = () => {
         toast.success("Conexión exitosa", {
           theme: isDarkMode ? "light" : "dark",
         });
+        navigate("/add-users");
       } else {
         toast.error(`Error: ${response.data.message}`, {
           theme: isDarkMode ? "light" : "dark",

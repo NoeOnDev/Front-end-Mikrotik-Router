@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
 import {
   FaTrash,
   FaComment,
@@ -13,9 +14,39 @@ import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AddUserModal } from "../utils/AddUserModal";
 
+interface User {
+  name: string;
+  comment?: string;
+  group: string;
+  address?: string;
+  "last-logged-in"?: string;
+}
+
 export const AddUsersPage: React.FC = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/users", {
+          ip: "192.168.0.41",
+          username: "admin",
+          password: "noeon",
+        });
+        if (response.data.status === "OK") {
+          setUsers(response.data.users);
+        } else {
+          console.error("Error fetching users:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleAddUser = (user: any) => {
     console.log(user);
@@ -59,22 +90,24 @@ export const AddUsersPage: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <button
-                    type="button"
-                    aria-label="Eliminar usuario"
-                    className={styles.deleteButton}
-                  >
-                    <FaTrash />
-                  </button>
-                </td>
-                <td>system default user</td>
-                <td>admin</td>
-                <td>full</td>
-                <td></td>
-                <td>2024-07-15 02:04:46</td>
-              </tr>
+              {users.map((user) => (
+                <tr key={user.name}>
+                  <td>
+                    <button
+                      type="button"
+                      aria-label="Eliminar usuario"
+                      className={styles.deleteButton}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                  <td>{user.comment}</td>
+                  <td>{user.name}</td>
+                  <td>{user.group}</td>
+                  <td>{user.address}</td>
+                  <td>{user["last-logged-in"]}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
