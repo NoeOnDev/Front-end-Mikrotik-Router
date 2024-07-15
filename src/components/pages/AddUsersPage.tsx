@@ -48,7 +48,7 @@ export const AddUsersPage: React.FC = () => {
           <table className={styles.userTable}>
             <thead>
               <tr>
-                <th>Acción</th>
+                <th></th>
                 <th>
                   <FaComment className={styles.icon} /> Comentario
                 </th>
@@ -77,7 +77,7 @@ export const AddUsersPage: React.FC = () => {
                     <FaTrash />
                   </button>
                 </td>
-                <td>system default user</td>
+                <td>system default user dwdfawdawdwad wdawdawdcaffsfsefsefsefesfsfadawdadwaw</td>
                 <td>admin</td>
                 <td>full</td>
                 <td></td>
