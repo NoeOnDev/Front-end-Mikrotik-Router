@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../../css/LoginStyles.module.css";
@@ -12,36 +12,19 @@ import {
   FaEyeSlash,
 } from "react-icons/fa";
 import { ThemeToggleButton } from "../utils/ThemeToggleButton";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export const LoginPage: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "light" ? true : false;
-  });
   const [ip, setIp] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => {
-      const newMode = !prevMode;
-      localStorage.setItem("theme", newMode ? "light" : "dark");
-      return newMode;
-    });
-  };
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.setAttribute("data-theme", "light");
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
-  }, [isDarkMode]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   FaTrash,
   FaComment,
@@ -10,28 +10,10 @@ import {
 } from "react-icons/fa";
 import styles from "../../css/AddUsersPage.module.css";
 import { ThemeToggleButton } from "../utils/ThemeToggleButton";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export const AddUsersPage: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "light" ? true : false;
-  });
-
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => {
-      const newMode = !prevMode;
-      localStorage.setItem("theme", newMode ? "light" : "dark");
-      return newMode;
-    });
-  };
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.setAttribute("data-theme", "light");
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
-  }, [isDarkMode]);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className={styles.container}>
@@ -77,7 +59,7 @@ export const AddUsersPage: React.FC = () => {
                     <FaTrash />
                   </button>
                 </td>
-                <td>system default user dwdfawdawdwad wdawdawdcaffsfsefsefsefesfsfadawdadwaw</td>
+                <td>system default user</td>
                 <td>admin</td>
                 <td>full</td>
                 <td></td>
