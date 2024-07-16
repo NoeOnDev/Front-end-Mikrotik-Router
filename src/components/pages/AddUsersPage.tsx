@@ -52,14 +52,25 @@ export const AddUsersPage: React.FC = () => {
           setUsers(response.data.users);
         } else {
           console.error("Error fetching users:", response.data.message);
+          toast.error(`Error: ${response.data.message}`, {
+            theme: isDarkMode ? "light" : "dark",
+          });
         }
       } catch (error) {
-        console.error("Error fetching users:", error);
+        if (error instanceof Error) {
+          toast.error(`Error: ${error.message}`, {
+            theme: isDarkMode ? "light" : "dark",
+          });
+        } else {
+          toast.error("Error desconocido", {
+            theme: isDarkMode ? "light" : "dark",
+          });
+        }
       }
     };
 
     fetchUsers();
-  }, []);
+  }, [isDarkMode]);
 
   const handleDeleteUser = async (userId: string) => {
     try {
@@ -81,17 +92,28 @@ export const AddUsersPage: React.FC = () => {
       });
 
       if (response.data.status === "OK") {
-        toast.success(response.data.message);
+        toast.success(response.data.message, {
+          theme: isDarkMode ? "light" : "dark",
+        });
         setUsers((prevUsers) =>
           prevUsers.filter((user) => user[".id"] !== userId)
         );
       } else {
         console.error("Error deleting user:", response.data.message);
-        toast.error(response.data.message);
+        toast.error(`Error: ${response.data.message}`, {
+          theme: isDarkMode ? "light" : "dark",
+        });
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
-      toast.error("Error deleting user");
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`, {
+          theme: isDarkMode ? "light" : "dark",
+        });
+      } else {
+        toast.error("Error desconocido", {
+          theme: isDarkMode ? "light" : "dark",
+        });
+      }
     }
   };
 
