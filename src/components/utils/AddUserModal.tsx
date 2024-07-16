@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import styles from "../../css/AddUserModal.module.css";
 
 interface AddUserModalProps {
@@ -23,6 +24,11 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
   const [inactivityPolicy, setInactivityPolicy] = useState("None");
 
   const handleSubmit = () => {
+    if (password !== confirmPassword) {
+      toast.error("Las contraseñas no coinciden");
+      return;
+    }
+
     const newUser = {
       enabled: enabled === "Enable",
       comment,
