@@ -51,8 +51,8 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             value={enabled}
             onChange={(e) => setEnabled(e.target.value)}
           >
-            <option value="true">Si</option>
-            <option value="false">No</option>
+            <option value="Enable">Si</option>
+            <option value="Disable">No</option>
           </select>
         </div>
         <div className={styles.formGroup}>
