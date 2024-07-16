@@ -14,6 +14,7 @@ import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AddUserModal } from "../utils/AddUserModal";
 import { useUsers } from "../hooks/useUsers";
+import { LogoutButton } from "../utils/LogoutButton";
 
 export const AddUsersPage: React.FC = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
@@ -91,6 +92,7 @@ export const AddUsersPage: React.FC = () => {
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddUser}
       />
+      <LogoutButton />
     </div>
   );
 };
