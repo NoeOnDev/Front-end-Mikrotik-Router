@@ -27,6 +27,8 @@
 .formGroup label {
     flex: 0 0 200px;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .formGroup input,
@@ -85,4 +87,8 @@
 
 .buttonGroup button:active {
     transform: scale(0.95);
+}
+
+.icon {
+    margin-right: 5px;
 }

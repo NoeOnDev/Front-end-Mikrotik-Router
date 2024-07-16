@@ -1,4 +1,14 @@
 import React, { useState } from "react";
+import {
+  FaToggleOn,
+  FaComment,
+  FaUser,
+  FaUsers,
+  FaMapMarkerAlt,
+  FaLock,
+  FaLockOpen,
+  FaClock,
+} from "react-icons/fa";
 import styles from "../../css/AddUserModal.module.css";
 
 interface AddUserModalProps {
@@ -45,7 +55,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         <div className={styles.formGroup}>
-          <label>Habilitado</label>
+          <label>
+            <FaToggleOn className={styles.icon} /> Habilitado
+          </label>
           <select
             title="None"
             value={enabled}
@@ -56,7 +68,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           </select>
         </div>
         <div className={styles.formGroup}>
-          <label>Comentario</label>
+          <label>
+            <FaComment className={styles.icon} /> Comentario
+          </label>
           <textarea
             placeholder="Comentario"
             value={comment}
@@ -64,7 +78,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Nombre</label>
+          <label>
+            <FaUser className={styles.icon} /> Nombre
+          </label>
           <input
             placeholder="Nombre"
             type="text"
@@ -73,7 +89,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Grupo</label>
+          <label>
+            <FaUsers className={styles.icon} /> Grupo
+          </label>
           <select
             title="none"
             value={group}
@@ -85,7 +103,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           </select>
         </div>
         <div className={styles.formGroup}>
-          <label>Dirección permitida</label>
+          <label>
+            <FaMapMarkerAlt className={styles.icon} /> Dirección permitida
+          </label>
           <input
             placeholder="Dirección permitida"
             type="text"
@@ -94,7 +114,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Contraseña</label>
+          <label>
+            <FaLock className={styles.icon} /> Contraseña
+          </label>
           <input
             placeholder="Contraseña"
             type="password"
@@ -103,7 +125,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Confirmar contraseña</label>
+          <label>
+            <FaLockOpen className={styles.icon} /> Confirmar contraseña
+          </label>
           <input
             placeholder="Confirmar contraseña"
             type="password"
@@ -112,7 +136,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Tiempo de inactividad</label>
+          <label>
+            <FaClock className={styles.icon} /> Tiempo de inactividad
+          </label>
           <input
             placeholder="10m"
             type="text"
@@ -121,7 +147,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
           />
         </div>
         <div className={styles.formGroup}>
-          <label>Política de inactividad</label>
+          <label>
+            <FaClock className={styles.icon} /> Política de inactividad
+          </label>
           <select
             title="None"
             value={inactivityPolicy}
