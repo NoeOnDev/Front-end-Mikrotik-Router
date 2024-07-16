@@ -117,50 +117,8 @@ export const AddUsersPage: React.FC = () => {
     }
   };
 
-  const handleAddUser = async (user: any) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        console.error("No token found");
-        return;
-      }
-
-      const response = await axios.post(
-        "http://localhost:5000/add_user",
-        user,
-        {
-          headers: {
-            Authorization: token,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.data.status === "OK") {
-        toast.success(response.data.message, {
-          theme: isDarkMode ? "light" : "dark",
-        });
-        setUsers((prevUsers) => [
-          ...prevUsers,
-          { ...user, ".id": response.data.id },
-        ]);
-      } else {
-        console.error("Error adding user:", response.data.message);
-        toast.error(`Error: ${response.data.message}`, {
-          theme: isDarkMode ? "light" : "dark",
-        });
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(`Error: ${error.message}`, {
-          theme: isDarkMode ? "light" : "dark",
-        });
-      } else {
-        toast.error("Error desconocido", {
-          theme: isDarkMode ? "light" : "dark",
-        });
-      }
-    }
+  const handleAddUser = (user: any) => {
+    console.log(user);
   };
 
   return (
