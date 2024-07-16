@@ -1,7 +1,6 @@
+// src/components/pages/LoginPage.tsx
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
 import styles from "../../css/LoginStyles.module.css";
 import logoNegro from "../../assets/logo-black.svg";
 import logoBlanco from "../../assets/logo-white.svg";
@@ -15,6 +14,7 @@ import {
 import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
+import useLogin from "../hooks/useLogin";
 
 export const LoginPage: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -22,8 +22,9 @@ export const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
-  const { login } = useAuth();
+  const { login: authLogin } = useAuth();
   const navigate = useNavigate();
+  const { login, loading } = useLogin(isDarkMode);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -31,33 +32,10 @@ export const LoginPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:5000/connect", {
-        ip,
-        username,
-        password,
-      });
-      if (response.data.status === "OK") {
-        toast.success("Conexión exitosa", {
-          theme: isDarkMode ? "light" : "dark",
-        });
-        login(response.data.token, 3600);
-        navigate("/add-users");
-      } else {
-        toast.error(`Error: ${response.data.message}`, {
-          theme: isDarkMode ? "light" : "dark",
-        });
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(`Error: ${error.message}`, {
-          theme: isDarkMode ? "light" : "dark",
-        });
-      } else {
-        toast.error("Error desconocido", {
-          theme: isDarkMode ? "light" : "dark",
-        });
-      }
+    const response = await login(ip, username, password);
+    if (response && response.status === "OK") {
+      authLogin(response.token ?? "valorPorDefecto", 3600);
+      navigate("/add-users");
     }
   };
 
@@ -118,8 +96,12 @@ export const LoginPage: React.FC = () => {
               {passwordVisible ? <FaEyeSlash /> : <FaEye />}
             </div>
           </div>
-          <button type="submit" className={styles.loginButton}>
-            Conectar
+          <button
+            type="submit"
+            className={styles.loginButton}
+            disabled={loading}
+          >
+            {loading ? "Conectando..." : "Conectar"}
           </button>
         </form>
         <div className={styles.links}>
