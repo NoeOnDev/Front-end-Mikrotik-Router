@@ -11,10 +11,8 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 40vh;
-    background-color: var(--background-color);
+    padding: 20px;
 }
 
 .themeToggleButton {
