@@ -13,6 +13,7 @@ import styles from "../../css/AddUsersPage.module.css";
 import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 import { ThemeContext } from "../../context/ThemeContext";
 import { AddUserModal } from "../utils/AddUserModal";
+import { toast } from "react-toastify";
 
 interface User {
   name: string;
@@ -20,6 +21,7 @@ interface User {
   group: string;
   address?: string;
   "last-logged-in"?: string;
+  ".id": string;
 }
 
 export const AddUsersPage: React.FC = () => {
@@ -58,6 +60,40 @@ export const AddUsersPage: React.FC = () => {
 
     fetchUsers();
   }, []);
+
+  const handleDeleteUser = async (userId: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("No token found");
+        return;
+      }
+
+      const data = { id: userId };
+      console.log("Sending data to delete user:", data);
+
+      const response = await axios.delete("http://localhost:5000/delete_user", {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        data: data,
+      });
+
+      if (response.data.status === "OK") {
+        toast.success(response.data.message);
+        setUsers((prevUsers) =>
+          prevUsers.filter((user) => user[".id"] !== userId)
+        );
+      } else {
+        console.error("Error deleting user:", response.data.message);
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      toast.error("Error deleting user");
+    }
+  };
 
   const handleAddUser = (user: any) => {
     console.log(user);
@@ -108,6 +144,7 @@ export const AddUsersPage: React.FC = () => {
                       type="button"
                       aria-label="Eliminar usuario"
                       className={styles.deleteButton}
+                      onClick={() => handleDeleteUser(user[".id"])}
                     >
                       <FaTrash />
                     </button>
