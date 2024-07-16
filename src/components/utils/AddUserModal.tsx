@@ -19,8 +19,8 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
   const [allowedAddress, setAllowedAddress] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [inactivityTimeout, setInactivityTimeout] = useState("00:10:00");
-  const [inactivityPolicy, setInactivityPolicy] = useState("None");
+  const [inactivityTimeout, setInactivityTimeout] = useState("10m");
+  const [inactivityPolicy, setInactivityPolicy] = useState("none");
 
   const handleSubmit = () => {
     const newUser = {
@@ -114,7 +114,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
         <div className={styles.formGroup}>
           <label>Tiempo de inactividad</label>
           <input
-            placeholder="00:10:00"
+            placeholder="10m"
             type="text"
             value={inactivityTimeout}
             onChange={(e) => setInactivityTimeout(e.target.value)}
@@ -127,9 +127,9 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             value={inactivityPolicy}
             onChange={(e) => setInactivityPolicy(e.target.value)}
           >
-            <option value="None">None</option>
-            <option value="Lockscreen">Lockscreen</option>
-            <option value="Logout">Logout</option>
+            <option value="none">None</option>
+            <option value="lockscreen">Lockscreen</option>
+            <option value="logout">Logout</option>
           </select>
         </div>
         <div className={styles.buttonGroup}>
