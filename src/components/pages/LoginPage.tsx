@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import { ThemeToggleButton } from "../utils/ThemeToggleButton";
 import { ThemeContext } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
 
 export const LoginPage: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -21,6 +22,7 @@ export const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -39,7 +41,7 @@ export const LoginPage: React.FC = () => {
         toast.success("Conexión exitosa", {
           theme: isDarkMode ? "light" : "dark",
         });
-        localStorage.setItem("token", response.data.token);
+        login(response.data.token, 3600);
         navigate("/add-users");
       } else {
         toast.error(`Error: ${response.data.message}`, {
