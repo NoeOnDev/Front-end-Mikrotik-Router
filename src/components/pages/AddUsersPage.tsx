@@ -1,4 +1,3 @@
-// src/components/pages/AddUsersPage.tsx
 import React, { useContext, useState } from "react";
 import {
   FaTrash,
@@ -22,8 +21,13 @@ export const AddUsersPage: React.FC = () => {
   const { users, addUser, deleteUser } = useUsers(isDarkMode);
 
   const handleAddUser = async (user: any) => {
-    await addUser(user);
-    setIsModalOpen(false);
+    try {
+      await addUser(user);
+      setIsModalOpen(false);
+      return true;
+    } catch (error) {
+      return false;
+    }
   };
 
   return (

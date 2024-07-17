@@ -14,7 +14,7 @@ import styles from "../../css/AddUserModal.module.css";
 interface AddUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (user: any) => void;
+  onSubmit: (user: any) => Promise<boolean>;
 }
 
 export const AddUserModal: React.FC<AddUserModalProps> = ({
@@ -32,7 +32,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
   const [inactivityTimeout, setInactivityTimeout] = useState("10m");
   const [inactivityPolicy, setInactivityPolicy] = useState("none");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newUser = {
       enabled: enabled === "Enable",
       comment,
@@ -43,8 +43,21 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
       inactivityTimeout,
       inactivityPolicy,
     };
-    onSubmit(newUser);
-    onClose();
+
+    const success = await onSubmit(newUser);
+
+    if (success) {
+      setEnabled("Enable");
+      setComment("");
+      setName("");
+      setGroup("full");
+      setAllowedAddress("");
+      setPassword("");
+      setConfirmPassword("");
+      setInactivityTimeout("10m");
+      setInactivityPolicy("none");
+      onClose();
+    }
   };
 
   if (!isOpen) {
@@ -82,6 +95,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             <FaUser className={styles.icon} /> Nombre
           </label>
           <input
+            required
             placeholder="Nombre"
             type="text"
             value={name}
@@ -118,6 +132,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             <FaLock className={styles.icon} /> Contraseña
           </label>
           <input
+            required
             placeholder="Contraseña"
             type="password"
             value={password}
@@ -129,6 +144,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             <FaLockOpen className={styles.icon} /> Confirmar contraseña
           </label>
           <input
+            required
             placeholder="Confirmar contraseña"
             type="password"
             value={confirmPassword}
