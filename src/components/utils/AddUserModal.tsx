@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   FaToggleOn,
   FaComment,
@@ -9,7 +9,9 @@ import {
   FaLockOpen,
   FaClock,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 import styles from "../../css/AddUserModal.module.css";
+import { ThemeContext } from "../../context/ThemeContext";
 
 interface AddUserModalProps {
   isOpen: boolean;
@@ -22,6 +24,7 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
   onClose,
   onSubmit,
 }) => {
+  const { isDarkMode } = useContext(ThemeContext);
   const [enabled, setEnabled] = useState("Enable");
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
@@ -33,6 +36,25 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
   const [inactivityPolicy, setInactivityPolicy] = useState("none");
 
   const handleSubmit = async () => {
+    if (!name) {
+      toast.error("El nombre es requerido", {
+        theme: isDarkMode ? "light" : "dark",
+      });
+      return;
+    }
+    if (!password) {
+      toast.error("La contraseña es requerida", {
+        theme: isDarkMode ? "light" : "dark",
+      });
+      return;
+    }
+    if (password !== confirmPassword) {
+      toast.error("Las contraseñas no coinciden", {
+        theme: isDarkMode ? "light" : "dark",
+      });
+      return;
+    }
+
     const newUser = {
       enabled: enabled === "Enable",
       comment,
@@ -95,7 +117,6 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             <FaUser className={styles.icon} /> Nombre
           </label>
           <input
-            required
             placeholder="Nombre"
             type="text"
             value={name}
@@ -132,7 +153,6 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             <FaLock className={styles.icon} /> Contraseña
           </label>
           <input
-            required
             placeholder="Contraseña"
             type="password"
             value={password}
@@ -144,7 +164,6 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
             <FaLockOpen className={styles.icon} /> Confirmar contraseña
           </label>
           <input
-            required
             placeholder="Confirmar contraseña"
             type="password"
             value={confirmPassword}
